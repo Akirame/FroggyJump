@@ -3,44 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-    public delegate void Death(Enemy e);
-    public Death OutOfScreen;
+    public delegate void EnemyDeath(Enemy e);
+    public EnemyDeath OutOfScreen;
 
     public float speed;
 
     private Vector3 dir;
     private bool toRight;
+    private Camera cam;
 
     private void Start()
     {
-        toRight = false;
-        dir = Vector3.zero;
+        cam = CameraController.Get().GetViewport();
     }
     void Update ()
     {
-        transform.position += dir * Time.deltaTime * speed;        
+        transform.position += dir * Time.deltaTime * speed;
+        CheckOOB();
 	}
 
     private void CheckOOB()
-    {
-        Vector3 OOBPos = CameraController.Get().GetViewport().ViewportToWorldPoint(transform.position);
+    {        
+        Vector3 OOBPos = cam.WorldToViewportPoint(transform.position);
         if (toRight)
         {
-            if (OOBPos.x > 1)
+            if (OOBPos.x > 1.05f)
+            {                
                 OutOfScreen(this);
+            }
         }
         else
         {
-            if (OOBPos.x < 0)
-                OutOfScreen(this);
+            if (OOBPos.x < -0.05f)
+            {
+                Debug.Log(OOBPos);                
+            }
         }
     }
 
     public void SetDirection(int direction)
-    {
+    {        
         switch (direction)
         {
-            case -1:
+            case 0:
                 toRight = false;
                 GetComponent<SpriteRenderer>().flipX = true;
                 dir = Vector2.left;

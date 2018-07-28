@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour {
         LEFT,
         RIGHT
     }
-    public List<GameObject> enemyList;
+    public GameObject Enemy;
     public Direction dir;
     public float delayTime;
     private float timer;
@@ -26,7 +26,14 @@ public class EnemySpawner : MonoBehaviour {
         }
         else
         {
-
+            GameObject e = Instantiate(Enemy, transform.position, Quaternion.identity, this.transform);
+            e.GetComponent<Enemy>().SetDirection((int)dir);
+            e.GetComponent<Enemy>().OutOfScreen += EnemyDeath;
+            timer = 0;
         }
 	}
+    private void EnemyDeath(Enemy e)
+    {
+        Destroy(e.gameObject);
+    }
 }
