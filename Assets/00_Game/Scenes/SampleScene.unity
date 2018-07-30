@@ -298,6 +298,21 @@ Prefab:
       propertyPath: delayTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114039096703822924, guid: 00adb000e40b2e64f823c2dcd3e2ab92,
+        type: 2}
+      propertyPath: quantity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114039096703822924, guid: 00adb000e40b2e64f823c2dcd3e2ab92,
+        type: 2}
+      propertyPath: delayTime1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114039096703822924, guid: 00adb000e40b2e64f823c2dcd3e2ab92,
+        type: 2}
+      propertyPath: delayTime2
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00adb000e40b2e64f823c2dcd3e2ab92, type: 2}
   m_IsPrefabParent: 0

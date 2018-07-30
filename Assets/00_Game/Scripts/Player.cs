@@ -24,12 +24,10 @@ public class Player : MonoBehaviour
 
     private float timer;
     private bool moving;
-    private Vector2 moveDir;
-    private Camera cam;
+    private Vector2 moveDir;    
 
     private void Start()
-    {
-        cam = CameraController.Get().GetViewport();
+    {        
         timer = 0;
         moving = false;
     }
@@ -77,10 +75,5 @@ public class Player : MonoBehaviour
                 moving = false;
             }
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "WALL")
-            Debug.Log("hola");
     }
 }

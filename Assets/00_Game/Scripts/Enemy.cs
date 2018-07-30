@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour {
         {
             if (OOBPos.x < -0.05f)
             {
-                Debug.Log(OOBPos);                
+                OutOfScreen(this);
             }
         }
     }
