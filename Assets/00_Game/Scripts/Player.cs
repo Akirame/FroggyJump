@@ -24,12 +24,14 @@ public class Player : MonoBehaviour
 
     private float timer;
     private bool moving;
-    private Vector2 moveDir;    
+    private Vector2 moveDir;
+    private bool stopped;
 
     private void Start()
     {        
         timer = 0;
         moving = false;
+        stopped = false;
     }
     void Update ()
     {
@@ -75,5 +77,29 @@ public class Player : MonoBehaviour
                 moving = false;
             }
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        Destroy(this.gameObject);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+            stopped = true;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+            stopped = false;
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Wood" && !(collision.gameObject.tag == "Water") && !moving && !stopped)
+        {
+            transform.parent = collision.transform;
+        }
+        else
+            transform.parent = null;
     }
 }

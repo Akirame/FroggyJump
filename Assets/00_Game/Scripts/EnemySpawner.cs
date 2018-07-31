@@ -21,8 +21,8 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        timer1 = 0;
-        timer2 = 0;
+        timer1 = delayTime1;
+        timer2 = delayTime2;
         conta = 1;
     }
     void Update()

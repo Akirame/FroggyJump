@@ -162,7 +162,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ Prefab:
         type: 2}
       propertyPath: Enemy
       value: 
-      objectReference: {fileID: 1332621828290416, guid: 1a90a0a767fd2a94d871d8e36c10188f,
+      objectReference: {fileID: 1299651648902044, guid: 510481504e73ee64d94a0bbbf61420b7,
         type: 2}
     - target: {fileID: 114039096703822924, guid: 00adb000e40b2e64f823c2dcd3e2ab92,
         type: 2}
@@ -311,7 +311,7 @@ Prefab:
     - target: {fileID: 114039096703822924, guid: 00adb000e40b2e64f823c2dcd3e2ab92,
         type: 2}
       propertyPath: delayTime2
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00adb000e40b2e64f823c2dcd3e2ab92, type: 2}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 1716496388}
   m_Layer: 8
   m_Name: OOB
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -494,6 +494,11 @@ Prefab:
     - target: {fileID: 1812682002639556, guid: 5b5b792b9e4577740a7ec5c218f639df, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 212879326451898972, guid: 5b5b792b9e4577740a7ec5c218f639df,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b5b792b9e4577740a7ec5c218f639df, type: 2}
