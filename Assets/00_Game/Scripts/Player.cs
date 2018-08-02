@@ -26,17 +26,33 @@ public class Player : MonoBehaviour
     private bool moving;
     private Vector2 moveDir;
     private bool stopped;
+    private bool onWood;
+    private bool onWater;
 
     private void Start()
-    {        
+    {
         timer = 0;
         moving = false;
         stopped = false;
+        onWood = false;
+        onWater = false;
     }
-    void Update ()
+    void Update()
     {
-        MoveController();        
-	}
+        MoveController();
+        if (!moving)
+        {
+            if (onWater)
+            {                
+                onWater = false;
+            }
+            else if (onWood && stopped)
+            {                
+                transform.parent = null;
+                onWood = false;
+            }
+        }
+    }
 
     private void MoveController()
     {
@@ -80,8 +96,8 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Enemy")
-        Destroy(this.gameObject);
+        if (collision.gameObject.tag == "Enemy")
+            Destroy(this.gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -93,13 +109,26 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Wall")
             stopped = false;
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    public void OnWater()
+    {        
+        if (!moving)
+            onWater = true;
+    }
+    public void OffWater()
     {
-        if (collision.gameObject.tag == "Wood" && !(collision.gameObject.tag == "Water") && !moving && !stopped)
+        onWater = false;
+    }
+    public void OnWood(GameObject gObj)
+    {        
+        if (!moving)
         {
-            transform.parent = collision.transform;
+            onWood = true;
+            transform.parent = gObj.transform;
         }
-        else
-            transform.parent = null;
+    }
+    public void OffWood()
+    {
+        onWood = false;
+        transform.parent = null;
     }
 }
