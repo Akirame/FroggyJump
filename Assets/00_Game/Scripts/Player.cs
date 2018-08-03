@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public delegate void PlayerActions(Player p);
     public static PlayerActions OnDeath;
 
+    public BoxCollider2D coll1;    
     public float time;
     public float speed;
 
@@ -33,38 +34,39 @@ public class Player : MonoBehaviour
     private bool onWood;
     private bool onWater;
     private Vector3 startPos;    
+
     private void Start()
-    {
+    {        
         lives = 3;
         timer = 0;
         moving = false;
         stopped = false;
         onWood = false;
         onWater = false;
-        startPos = transform.position;        
-}
+        startPos = transform.position;
+    }
     void Update()
     {
+        if (!onWood)
+        {
+            coll1.enabled = true;
+        }
+        else
+            coll1.enabled = false;
         transform.position = new Vector3(transform.position.x, transform.position.y, 10);
         MoveController();
-        if (!moving)
+        if (!moving && !onWood && onWater)
         {
-            if (!onWood)
-            {
-                transform.position = new Vector3(transform.position.x, Mathf.RoundToInt(transform.position.y), transform.position.z);                
-                if (onWater)
-                {
-                    OnDeath(this);
-                    onWater = false;
-                }
-            }
-            else if (onWood && stopped)
-            {
-                transform.parent = null;
-                onWood = false;
-            }
+            OnDeath(this);
+            onWater = false;
+        }
+        else if (onWood && stopped)
+        {
+            transform.parent = null;
+            onWood = false;
         }
     }
+    
     private void MoveController()
     {
         if (!moving)
@@ -100,6 +102,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                transform.position = new Vector3(transform.position.x, Mathf.RoundToInt(transform.position.y), transform.position.z);
                 timer = 0;
                 moving = false;
             }

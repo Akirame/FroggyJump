@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour
     public int quantity;
     public float delayTime1;
     public float delayTime2;
+    public bool instaSpawn;
     private float timer1;
     private float timer2;
     private int conta;
@@ -22,8 +23,16 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), transform.position.z);
-        timer1 = delayTime1;
-        timer2 = delayTime2;
+        if (instaSpawn)
+        {
+            timer1 = delayTime1;
+            timer2 = delayTime2;
+        }
+        else
+        {
+            timer1 = 0;
+            timer2 = delayTime2;
+        }
         conta = 1;
     }
     void Update()

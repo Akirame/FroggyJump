@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Detector : MonoBehaviour {
+public class Detector : MonoBehaviour
+{
 
     public enum TypeOf
     {
@@ -11,9 +12,18 @@ public class Detector : MonoBehaviour {
         WOOD,
     }
     public TypeOf type;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (type)
+        {
+            case TypeOf.WOOD:
+                Player.Get().OnWood(collision.gameObject);
+                break;
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(!Player.Get().Moving())
         switch (type)
         {
             case TypeOf.WATER:
@@ -22,7 +32,7 @@ public class Detector : MonoBehaviour {
             case TypeOf.WOOD:
                 Player.Get().OnWood(collision.gameObject);
                 break;
-        }      
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -31,7 +41,7 @@ public class Detector : MonoBehaviour {
             case TypeOf.WATER:
                 Player.Get().OffWater();
                 break;
-            case TypeOf.WOOD:                
+            case TypeOf.WOOD:
                 Player.Get().OffWood();
                 break;
         }
