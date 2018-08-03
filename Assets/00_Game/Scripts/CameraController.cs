@@ -24,12 +24,15 @@ public class CameraController : MonoBehaviour
     public Transform firstWall;
     public Transform secondWall;
     private Transform playerToFollow;
+    public float num;
+
     private float min;
     private float max;
-    public float num;
+    private Vector3 startPos;
 
     void Start()
     {
+        startPos = transform.position;
         playerToFollow = Player.Get().gameObject.transform;
         min = firstWall.position.y + num;
         max = secondWall.position.y - num;
@@ -46,5 +49,9 @@ public class CameraController : MonoBehaviour
     public Camera GetViewport()
     {
         return GetComponent<Camera>();
+    }
+    public void ResetPosition()
+    {
+        transform.position = startPos;
     }
 }

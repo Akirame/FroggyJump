@@ -22,20 +22,24 @@ public class Player : MonoBehaviour
     public float time;
     public float speed;
 
+    private int lives;
     private float timer;
     private bool moving;
     private Vector2 moveDir;
     private bool stopped;
     private bool onWood;
     private bool onWater;
+    private Vector3 startPos;
 
     private void Start()
     {
+        lives = 3;
         timer = 0;
         moving = false;
         stopped = false;
         onWood = false;
         onWater = false;
+        startPos = transform.position;
     }
     void Update()
     {
@@ -132,5 +136,9 @@ public class Player : MonoBehaviour
     {
         onWood = false;
         transform.parent = null;
+    }
+    public void ResetPosition()
+    {
+        transform.position = startPos;        
     }
 }
