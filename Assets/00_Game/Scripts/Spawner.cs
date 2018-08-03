@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
 
     public enum Direction
@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
         LEFT,
         RIGHT
     }
-    public GameObject Enemy;
+    public GameObject toSpawn;
     public Direction dir;
     public int quantity;
     public float delayTime1;
@@ -39,9 +39,9 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                GameObject e = Instantiate(Enemy, transform.position, Quaternion.identity, this.transform);
-                e.GetComponent<Enemy>().SetDirection((int)dir);
-                e.GetComponent<Enemy>().OutOfScreen += EnemyDeath;
+                GameObject e = Instantiate(toSpawn, transform.position, Quaternion.identity, this.transform);
+                e.GetComponent<MovingEntity>().SetDirection((int)dir);
+                e.GetComponent<MovingEntity>().OutOfScreen += OutOfScreenDestroy;
                 timer2 = 0;
                 if (conta < quantity)
                     conta++;
@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-    private void EnemyDeath(Enemy e)
+    private void OutOfScreenDestroy(MovingEntity e)
     {
         Destroy(e.gameObject);
     }

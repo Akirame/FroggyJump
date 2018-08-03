@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
-    public delegate void EnemyDeath(Enemy e);
+public class MovingEntity : MonoBehaviour {
+    public delegate void EnemyDeath(MovingEntity e);
     public EnemyDeath OutOfScreen;
 
     public float speed;
