@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    public delegate void PlayerActions(Player p);
+    public static PlayerActions OnDeath;
+
     public float time;
     public float speed;
 
@@ -29,8 +32,7 @@ public class Player : MonoBehaviour
     private bool stopped;
     private bool onWood;
     private bool onWater;
-    private Vector3 startPos;
-
+    private Vector3 startPos;    
     private void Start()
     {
         lives = 3;
@@ -39,27 +41,30 @@ public class Player : MonoBehaviour
         stopped = false;
         onWood = false;
         onWater = false;
-        startPos = transform.position;
-    }
+        startPos = transform.position;        
+}
     void Update()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 10);
         MoveController();
         if (!moving)
         {
             if (!onWood)
-                transform.position = new Vector3(transform.position.x, Mathf.RoundToInt(transform.position.y), transform.position.z);
-            else if (onWater)
-            {                
-                onWater = false;
+            {
+                transform.position = new Vector3(transform.position.x, Mathf.RoundToInt(transform.position.y), transform.position.z);                
+                if (onWater)
+                {
+                    OnDeath(this);
+                    onWater = false;
+                }
             }
             else if (onWood && stopped)
-            {                
+            {
                 transform.parent = null;
                 onWood = false;
             }
         }
     }
-
     private void MoveController()
     {
         if (!moving)
@@ -116,8 +121,8 @@ public class Player : MonoBehaviour
             stopped = false;
     }
     public void OnWater()
-    {        
-        if (!moving)
+    {
+        if (!moving && !onWood)
             onWater = true;
     }
     public void OffWater()
@@ -125,7 +130,7 @@ public class Player : MonoBehaviour
         onWater = false;
     }
     public void OnWood(GameObject gObj)
-    {        
+    {
         if (!moving)
         {
             onWood = true;
@@ -139,6 +144,13 @@ public class Player : MonoBehaviour
     }
     public void ResetPosition()
     {
-        transform.position = startPos;        
+        transform.position = startPos;
+    }
+    public bool Moving()
+    {
+        if (moving)
+            return true;
+        else
+            return false;
     }
 }
