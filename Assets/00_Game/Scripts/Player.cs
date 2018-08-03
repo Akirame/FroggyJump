@@ -42,7 +42,9 @@ public class Player : MonoBehaviour
         MoveController();
         if (!moving)
         {
-            if (onWater)
+            if (!onWood)
+                transform.position = new Vector3(transform.position.x, Mathf.RoundToInt(transform.position.y), transform.position.z);
+            else if (onWater)
             {                
                 onWater = false;
             }

@@ -21,6 +21,7 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
+        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), transform.position.z);
         timer1 = delayTime1;
         timer2 = delayTime2;
         conta = 1;
