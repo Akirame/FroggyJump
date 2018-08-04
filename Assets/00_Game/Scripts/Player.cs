@@ -33,7 +33,9 @@ public class Player : MonoBehaviour
     private bool stopped;
     private bool onWood;
     private bool onWater;
-    private Vector3 startPos;    
+    private Vector3 startPos;
+    private Animator animController;
+    private SpriteRenderer rend;
 
     private void Start()
     {        
@@ -44,6 +46,8 @@ public class Player : MonoBehaviour
         onWood = false;
         onWater = false;
         startPos = transform.position;
+        animController = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
@@ -71,29 +75,39 @@ public class Player : MonoBehaviour
     {
         if (!moving)
         {
+            animController.SetBool("moving", false);
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 moving = true;
                 moveDir = Vector2.up;
+                SetAnimParameters(true, false, true);
+                rend.flipY = false;
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 moving = true;
                 moveDir = Vector2.down;
+                SetAnimParameters(true, false, true);
+                rend.flipY = true;
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 moving = true;
                 moveDir = Vector2.left;
+                SetAnimParameters(false, true, true);
+                rend.flipX = false;
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 moving = true;
                 moveDir = Vector2.right;
+                SetAnimParameters(false, true, true);
+                rend.flipX = true;
             }
         }
         else
         {
+            animController.SetBool("moving", true);
             if (timer < time)
             {
                 timer += Time.deltaTime;
@@ -101,10 +115,10 @@ public class Player : MonoBehaviour
                 transform.position += dir * speed * Time.deltaTime;
             }
             else
-            {
+            {                
                 transform.position = new Vector3(transform.position.x, Mathf.RoundToInt(transform.position.y), transform.position.z);
                 timer = 0;
-                moving = false;
+                moving = false;                
             }
         }
     }
@@ -156,4 +170,11 @@ public class Player : MonoBehaviour
         else
             return false;
     }
+    private void SetAnimParameters(bool vertical, bool horizontal, bool moving)
+    {
+        animController.SetBool("vertical", vertical);
+        animController.SetBool("horizontal", horizontal);
+        animController.SetBool("moving", moving);
+    }
+
 }
