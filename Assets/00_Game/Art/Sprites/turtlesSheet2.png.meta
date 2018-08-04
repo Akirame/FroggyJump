@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 4f76b868cb421cd4f9301c21eddfa829
+guid: 500ff329bcbeb314b9f73e16fa0ff362
 TextureImporter:
   fileIDToRecycleName:
-    21300000: turtlesSheet_0
-    21300002: turtlesSheet_1
-    21300004: turtlesSheet_2
-    21300006: turtlesSheet_3
-    21300008: turtlesSheet_4
+    21300000: turtlesSheet2_0
+    21300002: turtlesSheet2_1
+    21300004: turtlesSheet2_2
+    21300006: turtlesSheet2_3
+    21300008: turtlesSheet2_4
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -98,12 +98,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: turtlesSheet_0
+      name: turtlesSheet2_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 4
-        width: 15
+        x: 1
+        y: 71
+        width: 49
         height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -112,18 +112,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e337b3d3c004c6e4d83cf6e49aef232d
+      spriteID: 693f6a4a29328a24aacee08474952801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turtlesSheet_1
+      name: turtlesSheet2_1
       rect:
         serializedVersion: 2
-        x: 25
-        y: 3
-        width: 17
+        x: 0
+        y: 54
+        width: 51
         height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -132,18 +132,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 999680a9b4bff8f4f9992866b6b7ff44
+      spriteID: 26d6285dc6a045a44b6354dc32b37757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turtlesSheet_2
+      name: turtlesSheet2_2
       rect:
         serializedVersion: 2
-        x: 49
-        y: 3
-        width: 17
+        x: 0
+        y: 37
+        width: 51
         height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -152,19 +152,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2370579624007a94e9e21ebc68cd6018
+      spriteID: d822609710a23bc4cbdd67661a1a0d83
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turtlesSheet_3
+      name: turtlesSheet2_3
       rect:
         serializedVersion: 2
-        x: 84
-        y: 4
-        width: 12
-        height: 12
+        x: 3
+        y: 21
+        width: 46
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,18 +172,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f19c1a1c943a28649bb0e86339754d44
+      spriteID: eba5bd44e15e9804c933b70d851eabc8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turtlesSheet_4
+      name: turtlesSheet2_4
       rect:
         serializedVersion: 2
-        x: 106
+        x: 1
         y: 2
-        width: 16
+        width: 50
         height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -192,7 +192,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe4871bdf6c4a8d44aad99fa0d95c0dc
+      spriteID: d953576edd630ac478e68e8bc06b71ad
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: bc4b2b7bd07605b4cb2f208d18250b7b
+    spriteID: 17b9144e7e6ff7d45ab31d9ea2f46010
     vertices: []
     indices: 
     edges: []
