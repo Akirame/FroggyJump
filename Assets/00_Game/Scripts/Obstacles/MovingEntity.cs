@@ -6,7 +6,7 @@ public class MovingEntity : MonoBehaviour {
     public delegate void EnemyDeath(MovingEntity e);
     public EnemyDeath OutOfScreen;
 
-    public float speed;
+    private float speed;
 
     private Vector3 dir;
     private bool toRight;
@@ -40,7 +40,10 @@ public class MovingEntity : MonoBehaviour {
             }
         }
     }
-
+    public void SetSpeed(int _speed)
+    {
+        speed = _speed;
+    }
     public void SetDirection(int direction)
     {        
         switch (direction)

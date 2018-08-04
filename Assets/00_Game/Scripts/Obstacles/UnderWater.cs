@@ -9,11 +9,13 @@ public class UnderWater : MonoBehaviour
 
     private float timer;
     private bool flip;
+    private bool underwater;
     private SpriteRenderer rend;
     private BoxCollider2D col;
 
     private void Start()
     {
+        underwater = false;
         timer = 0;
         flip = false;
         rend = GetComponent<SpriteRenderer>();
@@ -27,8 +29,13 @@ public class UnderWater : MonoBehaviour
         }
         else
         {
-            flip = true;
-            ChangeAnimation();
+            if (Random.Range(0,2) == 0 || underwater)
+            {
+                flip = true;
+                ChangeAnimation();
+            }
+            else
+                timer = 0;
         }
     }
     private void ChangeAnimation()
@@ -38,9 +45,15 @@ public class UnderWater : MonoBehaviour
     private void FlipFlopColliders()
     {
         if (col.enabled)
+        {
             col.enabled = false;
+            underwater = true;
+        }
         else
+        {
             col.enabled = true;
+            underwater = false;
+        }
         timer = 0;
         flip = false;
     }

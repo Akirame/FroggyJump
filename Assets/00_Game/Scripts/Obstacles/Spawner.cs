@@ -16,12 +16,18 @@ public class Spawner : MonoBehaviour
     public float delayTime1;
     public float delayTime2;
     public bool instaSpawn;
+    public int minSpeed;
+    public int maxSpeed;
+    private bool changeSpeed;
+    private int speed;
     private float timer1;
     private float timer2;
     private int conta;
 
     void Start()
     {
+        changeSpeed = true;
+        speed = 0;
         transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), transform.position.z);
         if (instaSpawn)
         {
@@ -37,6 +43,12 @@ public class Spawner : MonoBehaviour
     }
     void Update()
     {
+        if (changeSpeed)
+        {
+            speed = Random.Range(minSpeed, maxSpeed + 1);
+            changeSpeed = false;
+        }
+
         if (timer1 < delayTime1)
         {
             timer1 += Time.deltaTime;
@@ -51,6 +63,7 @@ public class Spawner : MonoBehaviour
             {
                 GameObject e = Instantiate(toSpawn, transform.position, Quaternion.identity, this.transform);
                 e.GetComponent<MovingEntity>().SetDirection((int)dir);
+                e.GetComponent<MovingEntity>().SetSpeed(speed);
                 e.GetComponent<MovingEntity>().OutOfScreen += OutOfScreenDestroy;
                 timer2 = 0;
                 if (conta < quantity)
@@ -59,6 +72,7 @@ public class Spawner : MonoBehaviour
                 {
                     timer1 = 0;
                     conta = 1;
+                    changeSpeed = true;
                 }
             }
         }
