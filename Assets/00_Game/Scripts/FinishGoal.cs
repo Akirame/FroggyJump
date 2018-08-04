@@ -7,20 +7,26 @@ public class FinishGoal : MonoBehaviour
     public delegate void FinishAction (FinishGoal f);
     public static FinishAction Finished;
 
-    private BoxCollider2D coll;
+    private Color spriteColor;
+    private BoxCollider2D boxColl;
     private SpriteRenderer rend;
+
     private void Start()
     {
-        coll = GetComponent<BoxCollider2D>();
+        boxColl = GetComponent<BoxCollider2D>();
         rend = GetComponent<SpriteRenderer>();
+        spriteColor = rend.color;
+        spriteColor.a = 0f;
+        rend.color = spriteColor;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            rend.color = Color.black;
-            coll.enabled = false;
+            spriteColor.a = 1f;
+            rend.color = spriteColor;
+            boxColl.enabled = false;
             Finished(this);
         }
     }
