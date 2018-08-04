@@ -36,10 +36,12 @@ public class Player : MonoBehaviour
     private Vector3 startPos;
     private Animator animController;
     private SpriteRenderer rend;
+    private bool alive;
 
     private void Start()
     {        
         lives = 3;
+        alive = true;
         timer = 0;
         moving = false;
         stopped = false;
@@ -51,28 +53,33 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        if (!onWood)
+        if (lives <= 0)
+            alive = false;
+        if (alive)
         {
-            coll1.enabled = true;
-        }
-        else
-            coll1.enabled = false;
-        transform.position = new Vector3(transform.position.x, transform.position.y, 10);
-        MoveController();
-        if (!moving && !onWood && onWater)
-        {
-            OnDeath(this);
-            onWater = false;
-        }
-        else if (onWood && stopped)
-        {
-            transform.parent = null;
-            onWood = false;
+            if (!onWood)
+            {
+                coll1.enabled = true;
+            }
+            else
+                coll1.enabled = false;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 10);
+            MoveController();
+            if (!moving && !onWood && onWater)
+            {
+                DeathAnimation();
+                onWater = false;
+            }
+            else if (onWood && stopped)
+            {
+                transform.parent = null;
+                onWood = false;
+            }
         }
     }
     
     private void MoveController()
-    {
+    {        
         if (!moving)
         {
             animController.SetBool("moving", false);
@@ -125,7 +132,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
-            Destroy(this.gameObject);
+            this.GetComponent<Animator>().SetTrigger("death");
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -176,5 +183,17 @@ public class Player : MonoBehaviour
         animController.SetBool("horizontal", horizontal);
         animController.SetBool("moving", moving);
     }
-
+    private void DeathAnimation()
+    {
+        this.GetComponent<Animator>().SetTrigger("death");
+        alive = false;
+    }
+    private void Death()
+    {        
+        SetAnimParameters(false, false, false);
+        this.GetComponent<Animator>().SetTrigger("alive");
+        OnDeath(this);
+        lives--;
+        alive = true;
+    }
 }
