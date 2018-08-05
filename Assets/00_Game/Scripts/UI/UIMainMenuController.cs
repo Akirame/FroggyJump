@@ -25,16 +25,13 @@ public class UIMainMenuController : MonoBehaviour {
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow) && onStart)
-        {
-            Debug.Log("holi");
-            //AudioSource.PlayClipAtPoint(audioMove, CameraController.Get().transform.position, 0.70f);
+        {            
             imageStart.SetActive(false);
             imageExit.SetActive(true);
             onStart = false;
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow) && !onStart)
-        {            
-           // AudioSource.PlayClipAtPoint(audioMove, CameraController.Get().transform.position, 1f);
+        {                     
             imageStart.SetActive(true);
             imageExit.SetActive(false);
             onStart = true;
@@ -55,8 +52,7 @@ public class UIMainMenuController : MonoBehaviour {
         }
     }
         IEnumerator ChangeScene(string sceneName)
-        {
-            //AudioSource.PlayClipAtPoint(audioSelect, CameraController.Get().transform.position, 1f);
+        {            
             yield return new WaitForSeconds(2);
             LoaderManager.Get().LoadScene(sceneName);
         }

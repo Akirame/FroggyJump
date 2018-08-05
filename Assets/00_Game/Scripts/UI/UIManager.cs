@@ -5,6 +5,24 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    #region singleton
+    private static UIManager instance;
+    public static UIManager Get()
+    {
+        return instance;
+    }
+    private void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+            Destroy(this.gameObject);
+    }
+    #endregion
+
     public delegate void UIactions(UIManager u);
     public static UIactions ResetGame;
 
@@ -84,7 +102,7 @@ public class UIManager : MonoBehaviour
     public void LevelFinish(bool win)
     {
         GameManager.Get().AddScore(1000 - Mathf.FloorToInt(GameManager.Get().GetTime()) + (Player.Get().GetLives() * 500));
-
+        
         gameCanvas.SetActive(false);
         pauseCanvas.SetActive(false);
         levelResultCanvas.SetActive(true);
@@ -113,5 +131,20 @@ public class UIManager : MonoBehaviour
     public void NextLevel()
     {
         GameManager.Get().LevelFinish();
+    }
+    public void LevelLoaded(LoaderManager l)
+    {
+        if (l.OnLevel())
+        {
+            gameCanvas.SetActive(true);
+            pauseCanvas.SetActive(false);
+            levelResultCanvas.SetActive(false);
+        }
+        else
+        {
+            gameCanvas.SetActive(false);
+            pauseCanvas.SetActive(false);
+            levelResultCanvas.SetActive(false);
+        }
     }
 }

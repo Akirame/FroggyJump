@@ -30,11 +30,13 @@ public class LoaderManager : MonoBehaviour
     public float minTimeToLoad = 2;
 
     private Scene currentScene;
+    private string sceneLoading;
 
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene("LoadingScreen");
         StartCoroutine(AsynchronousLoad(sceneName));
+        sceneLoading = sceneName;
     }
     public bool OnLevel()
     {
@@ -46,6 +48,10 @@ public class LoaderManager : MonoBehaviour
         }
         else
             return false;
+    }
+    public string GetNextScene()
+    {
+        return sceneLoading;
     }
     IEnumerator AsynchronousLoad(string scene)
     {

@@ -23,14 +23,12 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     private int score;
-    private float time;
-    private CameraController cam;
+    private float time;    
 
     private void Start()
     {
         time = 0;
-        score = 0;
-        cam = CameraController.Get();
+        score = 0;        
 
         Player.OnDeath += ResetPlayer;
         FinishManager.GoalTouched += ResetPlayerAddScore;        
@@ -50,12 +48,12 @@ public class GameManager : MonoBehaviour {
     public void ResetPlayer(Player p)
     {        
         p.ResetPosition();
-        cam.ResetPosition();
+        CameraController.Get().ResetPosition();
     }
     public void ResetPlayerAddScore(FinishManager f)
     {        
         Player.Get().ResetPosition();
-        cam.ResetPosition();
+        CameraController.Get().ResetPosition();
         AddScore(500);
     }
     public void LevelFinish()

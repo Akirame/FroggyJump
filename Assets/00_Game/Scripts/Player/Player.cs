@@ -64,6 +64,8 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.X))
+            lives = 3;
         if (alive && lives > 0)
         {
             if (!onWood)
@@ -183,6 +185,7 @@ public class Player : MonoBehaviour
         lives--;
         noLivesBool = false;    
         ColliderControllers(true, true, true);
+        timer = 0;
         alive = true;
     }
     private void ColliderControllers(bool frog,bool water,bool wood)
