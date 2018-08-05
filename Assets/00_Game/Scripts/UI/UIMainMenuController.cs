@@ -6,8 +6,6 @@ public class UIMainMenuController : MonoBehaviour {
 
     public GameObject imageStart;
     public GameObject imageExit;
-    public AudioClip audioMove;
-    public AudioClip audioSelect;
 
     private Animator anim;
     private bool onStart;
@@ -37,7 +35,7 @@ public class UIMainMenuController : MonoBehaviour {
             onStart = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             if (onStart && !selected)
             {

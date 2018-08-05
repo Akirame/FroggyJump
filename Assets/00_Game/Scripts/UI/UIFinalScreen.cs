@@ -13,7 +13,7 @@ public class UIFinalScreen : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
         }
