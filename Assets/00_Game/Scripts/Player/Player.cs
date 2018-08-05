@@ -21,13 +21,16 @@ public class Player : MonoBehaviour
 
     public delegate void PlayerActions(Player p);
     public static PlayerActions OnDeath;
+    public static PlayerActions NoMoreLives;
 
     public float time;
     public float speed;
 
     private bool alive;
+    private bool noLivesBool;
     private int lives;
     private float timer;
+
 
     private bool moving;
     private Vector2 moveDir;
@@ -45,9 +48,10 @@ public class Player : MonoBehaviour
     private BoxCollider2D frogCollider;
 
     private void Start()
-    {        
+    {
         lives = 3;
         alive = true;
+        noLivesBool = true;
         timer = 0;
         moving = false;
         stopped = false;
@@ -60,9 +64,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        if (lives <= 0)
-            alive = false;
-        if (alive)
+        if (alive && lives > 0)
         {
             if (!onWood)
             {
@@ -82,6 +84,11 @@ public class Player : MonoBehaviour
                 transform.parent = null;
                 onWood = false;
             }
+        }
+        else if (!noLivesBool && lives <= 0)
+        {            
+            NoMoreLives(this);
+            noLivesBool = true;
         }
     }
     
@@ -156,6 +163,34 @@ public class Player : MonoBehaviour
         if (!moving && !onWood)
             onWater = true;
     }
+    private void SetAnimParameters(bool vertical, bool horizontal, bool moving)
+    {
+        animController.SetBool("vertical", vertical);
+        animController.SetBool("horizontal", horizontal);
+        animController.SetBool("moving", moving);
+    }
+    private void DeathAnimation()
+    {
+        ColliderControllers(false, false, false);
+        this.GetComponent<Animator>().SetTrigger("death");
+        alive = false;        
+    }
+    private void Death()
+    {        
+        SetAnimParameters(false, false, false);
+        this.GetComponent<Animator>().SetTrigger("alive");
+        OnDeath(this);
+        lives--;
+        noLivesBool = false;    
+        ColliderControllers(true, true, true);
+        alive = true;
+    }
+    private void ColliderControllers(bool frog,bool water,bool wood)
+    {
+        frogCollider.enabled = frog;
+        woodCollider.enabled = wood;
+        waterCollider.enabled = water;
+    }
     public void OffWater()
     {
         onWater = false;
@@ -184,33 +219,6 @@ public class Player : MonoBehaviour
             return true;
         else
             return false;
-    }
-    private void SetAnimParameters(bool vertical, bool horizontal, bool moving)
-    {
-        animController.SetBool("vertical", vertical);
-        animController.SetBool("horizontal", horizontal);
-        animController.SetBool("moving", moving);
-    }
-    private void DeathAnimation()
-    {
-        ColliderControllers(false, false, false);
-        this.GetComponent<Animator>().SetTrigger("death");
-        alive = false;
-    }
-    private void Death()
-    {        
-        SetAnimParameters(false, false, false);
-        this.GetComponent<Animator>().SetTrigger("alive");
-        OnDeath(this);
-        lives--;
-        ColliderControllers(true, true, true);
-        alive = true;
-    }
-    private void ColliderControllers(bool frog,bool water,bool wood)
-    {
-        frogCollider.enabled = frog;
-        woodCollider.enabled = wood;
-        waterCollider.enabled = water;
     }
     public int GetLives()
     {

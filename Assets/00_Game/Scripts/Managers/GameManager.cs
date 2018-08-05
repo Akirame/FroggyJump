@@ -33,8 +33,7 @@ public class GameManager : MonoBehaviour {
         cam = CameraController.Get();
 
         Player.OnDeath += ResetPlayer;
-        FinishManager.GoalTouched += ResetPlayerAddScore;
-        FinishManager.LevelFinish += LevelFinish;
+        FinishManager.GoalTouched += ResetPlayerAddScore;        
         UIManager.ResetGame += ResetGame;
     }
     private void Update()
@@ -56,9 +55,8 @@ public class GameManager : MonoBehaviour {
         cam.ResetPosition();
         AddScore(500);
     }
-    public void LevelFinish(FinishManager f)
-    {
-        AddScore(1000 - Mathf.FloorToInt(time) + (Player.Get().GetLives() * 500));
+    public void LevelFinish()
+    {        
         Scene currScene = SceneManager.GetActiveScene();
         switch (currScene.name)
         {
