@@ -176,6 +176,7 @@ public class Player : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = startPos;
+        moving = false;
     }
     public bool Moving()
     {
@@ -210,5 +211,9 @@ public class Player : MonoBehaviour
         frogCollider.enabled = frog;
         woodCollider.enabled = wood;
         waterCollider.enabled = water;
+    }
+    public int GetLives()
+    {
+        return lives;
     }
 }

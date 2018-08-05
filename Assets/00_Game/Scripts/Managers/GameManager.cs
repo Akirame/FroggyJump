@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     private int score;
-    private int time;
+    private float time;
     private CameraController cam;
 
     private void Start()
@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviour {
         FinishManager.LevelFinish += LevelFinish;
         cam = CameraController.Get();
     }
-
+    private void Update()
+    {
+        time += Time.deltaTime;
+    }
     public void AddScore(int addScore)
     {
         score = addScore;
@@ -53,7 +56,7 @@ public class GameManager : MonoBehaviour {
     }
     public void LevelFinish(FinishManager f)
     {
-        AddScore(1000 - time);
+        AddScore(1000 - Mathf.FloorToInt(time) + (Player.Get().GetLives() * 500));
         Scene currScene = SceneManager.GetActiveScene();
         switch (currScene.name)
         {
@@ -67,5 +70,14 @@ public class GameManager : MonoBehaviour {
                 LoaderManager.Get().LoadScene("FinalScreen");
                 break;
         }
+    }
+    public void ResetGame(UIManager u)
+    {
+        score = 0;
+        time = 0;
+    }
+    public float GetTime()
+    {
+        return time;
     }
 }
