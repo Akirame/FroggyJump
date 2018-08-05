@@ -56,3 +56,6 @@ MonoBehaviour:
   quantity: 2
   delayTime1: 3
   delayTime2: 2
+  instaSpawn: 0
+  minSpeed: 0
+  maxSpeed: 0

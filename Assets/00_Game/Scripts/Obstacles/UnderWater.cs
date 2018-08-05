@@ -10,7 +10,6 @@ public class UnderWater : MonoBehaviour
     private float timer;
     private bool flip;
     private bool underwater;
-    private SpriteRenderer rend;
     private BoxCollider2D col;
 
     private void Start()
@@ -18,7 +17,6 @@ public class UnderWater : MonoBehaviour
         underwater = false;
         timer = 0;
         flip = false;
-        rend = GetComponent<SpriteRenderer>();
         col = GetComponent<BoxCollider2D>();
     }
     private void Update()

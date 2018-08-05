@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     #region singleton
     private static GameManager instance;
@@ -48,11 +49,23 @@ public class GameManager : MonoBehaviour {
     {        
         Player.Get().ResetPosition();
         cam.ResetPosition();
-        AddScore(200);
+        AddScore(500);
     }
     public void LevelFinish(FinishManager f)
     {
-        Debug.Log("win");
+        AddScore(1000 - time);
+        Scene currScene = SceneManager.GetActiveScene();
+        switch (currScene.name)
+        {
+            case "Level1":
+                LoaderManager.Get().LoadScene("Level2");
+                break;
+            case "Level2":
+                LoaderManager.Get().LoadScene("Level3");
+                break;
+            case "Level3":
+                LoaderManager.Get().LoadScene("FinalScreen");
+                break;
+        }
     }
-
 }

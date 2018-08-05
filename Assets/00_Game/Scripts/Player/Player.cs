@@ -22,21 +22,27 @@ public class Player : MonoBehaviour
     public delegate void PlayerActions(Player p);
     public static PlayerActions OnDeath;
 
-    public BoxCollider2D coll1;    
     public float time;
     public float speed;
 
+    private bool alive;
     private int lives;
     private float timer;
+
     private bool moving;
     private Vector2 moveDir;
     private bool stopped;
+
     private bool onWood;
     private bool onWater;
+
     private Vector3 startPos;
     private Animator animController;
     private SpriteRenderer rend;
-    private bool alive;
+
+    public BoxCollider2D waterCollider;
+    public BoxCollider2D woodCollider;
+    private BoxCollider2D frogCollider;
 
     private void Start()
     {        
@@ -50,6 +56,7 @@ public class Player : MonoBehaviour
         startPos = transform.position;
         animController = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
+        frogCollider = GetComponent<BoxCollider2D>();
     }
     void Update()
     {
@@ -59,10 +66,10 @@ public class Player : MonoBehaviour
         {
             if (!onWood)
             {
-                coll1.enabled = true;
+                waterCollider.enabled = true;
             }
             else
-                coll1.enabled = false;
+                waterCollider.enabled = false;
             transform.position = new Vector3(transform.position.x, transform.position.y, 10);
             MoveController();
             if (!moving && !onWood && onWater)
@@ -132,7 +139,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
-            this.GetComponent<Animator>().SetTrigger("death");
+            DeathAnimation();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -185,6 +192,7 @@ public class Player : MonoBehaviour
     }
     private void DeathAnimation()
     {
+        ColliderControllers(false, false, false);
         this.GetComponent<Animator>().SetTrigger("death");
         alive = false;
     }
@@ -194,6 +202,13 @@ public class Player : MonoBehaviour
         this.GetComponent<Animator>().SetTrigger("alive");
         OnDeath(this);
         lives--;
+        ColliderControllers(true, true, true);
         alive = true;
+    }
+    private void ColliderControllers(bool frog,bool water,bool wood)
+    {
+        frogCollider.enabled = frog;
+        woodCollider.enabled = wood;
+        waterCollider.enabled = water;
     }
 }
