@@ -30,10 +30,12 @@ public class GameManager : MonoBehaviour {
     {
         time = 0;
         score = 0;
+        cam = CameraController.Get();
+
         Player.OnDeath += ResetPlayer;
         FinishManager.GoalTouched += ResetPlayerAddScore;
         FinishManager.LevelFinish += LevelFinish;
-        cam = CameraController.Get();
+        UIManager.ResetGame += ResetGame;
     }
     private void Update()
     {
@@ -75,9 +77,14 @@ public class GameManager : MonoBehaviour {
     {
         score = 0;
         time = 0;
+        LoaderManager.Get().LoadScene("MainMenu");
     }
     public float GetTime()
     {
         return time;
+    }
+    public int GetScore()
+    {
+        return score;
     }
 }

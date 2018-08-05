@@ -52,8 +52,7 @@ public class LoaderManager : MonoBehaviour
         timeLoading = 0;
         yield return null;
         AsyncOperation ao = SceneManager.LoadSceneAsync(scene);
-        ao.allowSceneActivation = false;
-
+        ao.allowSceneActivation = false;        
         while (!ao.isDone)
         {
             timeLoading += Time.deltaTime;
