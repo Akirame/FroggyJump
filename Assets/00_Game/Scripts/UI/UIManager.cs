@@ -110,4 +110,8 @@ public class UIManager : MonoBehaviour
     {
         LevelFinish(false);
     }
+    public void NextLevel()
+    {
+        GameManager.Get().LevelFinish();
+    }
 }

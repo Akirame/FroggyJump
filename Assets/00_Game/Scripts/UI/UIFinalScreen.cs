@@ -9,7 +9,7 @@ public class UIFinalScreen : MonoBehaviour
 
     private void Start()
     {
-        //scoreText.text = "Score : " + GameManager.Get().GetScore();
+        scoreText.text = "Score : " + GameManager.Get().GetScore().ToString("0000000");
     }
     private void Update()
     {

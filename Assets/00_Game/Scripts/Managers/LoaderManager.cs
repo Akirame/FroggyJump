@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class LoaderManager : MonoBehaviour
 {
-
     #region singleton
     private static LoaderManager instance;
     public static LoaderManager Get()
@@ -23,6 +22,8 @@ public class LoaderManager : MonoBehaviour
             Destroy(this.gameObject);
     }
     #endregion
+    public delegate void LoaderActions(LoaderManager l);
+    public static LoaderActions LoadComplete;
 
     public float loadingProgress;
     public float timeLoading;
@@ -62,6 +63,7 @@ public class LoaderManager : MonoBehaviour
             // Loading completed
             if (loadingProgress >= 1)
             {
+                LoadComplete(this);
                 ao.allowSceneActivation = true;
             }
 

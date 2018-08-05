@@ -35,10 +35,13 @@ public class GameManager : MonoBehaviour {
         Player.OnDeath += ResetPlayer;
         FinishManager.GoalTouched += ResetPlayerAddScore;        
         UIManager.ResetGame += ResetGame;
+        LoaderManager.LoadComplete += ResetTime;
     }
     private void Update()
     {
         time += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Z))
+            LevelFinish();
     }
     public void AddScore(int addScore)
     {
@@ -84,5 +87,9 @@ public class GameManager : MonoBehaviour {
     public int GetScore()
     {
         return score;
+    }
+    public void ResetTime(LoaderManager l)
+    {
+        time = 0;
     }
 }
