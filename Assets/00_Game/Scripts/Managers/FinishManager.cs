@@ -37,7 +37,7 @@ public class FinishManager : MonoBehaviour {
     {
         if (goalCount <= 0)
         {
-            goalCount = 5;
+            goalCount = 4;
             LevelFinish(this);
         }
     }

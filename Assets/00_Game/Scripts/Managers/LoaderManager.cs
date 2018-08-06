@@ -49,6 +49,16 @@ public class LoaderManager : MonoBehaviour
         else
             return false;
     }
+    public bool IsNextALevel()
+    {
+        if (sceneLoading == "Level1" || sceneLoading == "Level2" || sceneLoading == "Level3")
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
     public string GetNextScene()
     {
         return sceneLoading;

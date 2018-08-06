@@ -54,6 +54,7 @@ public class UIManager : MonoBehaviour
         scoreGameText.text = score.ToString("0000000");
         FinishManager.LevelFinish += ActivateFinishCanvasWin;
         Player.NoMoreLives += ActivateFinishCanvasLose;
+        LoaderManager.LoadComplete += LevelLoaded;
     }
 
     private void Update()
@@ -133,8 +134,8 @@ public class UIManager : MonoBehaviour
         GameManager.Get().LevelFinish();
     }
     public void LevelLoaded(LoaderManager l)
-    {
-        if (l.OnLevel())
+    {        
+        if (l.IsNextALevel())
         {
             gameCanvas.SetActive(true);
             pauseCanvas.SetActive(false);
